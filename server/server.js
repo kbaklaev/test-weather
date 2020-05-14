@@ -4,11 +4,13 @@ import path from 'path'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import sockjs from 'sockjs'
+import axios from 'axios'
 
 import cookieParser from 'cookie-parser'
 import Html from '../client/html'
 
 let connections = []
+const id = process.env.REACT_APP_OPENWEATHER_ID
 
 const port = process.env.PORT || 3000
 const server = express()
@@ -21,10 +23,10 @@ server.use(bodyParser.json({ limit: '50mb', extended: true }))
 
 server.use(cookieParser())
 
-server.use('/api/', (req, res) => {
-  res.status(404)
-  res.end()
-})
+// server.use('/api/', (req, res) => {
+//   res.status(404)
+//   res.end()
+// })
 
 const echo = sockjs.createServer()
 echo.on('connection', (conn) => {
@@ -45,6 +47,23 @@ server.get('/', (req, res) => {
       title
     })
   )
+})
+
+server.get('/api/weather/:city', async (req, res) => {
+  const url = `https://api.openweathermap.org/data/2.5/find?q=${encodeURIComponent(
+    req.params.city
+  )}&units=metric&appid=${id}`
+  await axios
+    .get(url)
+    // eslint-disable-next-line no-console
+    .then(() => console.log(id, url))
+    // .then((data) => res.send(data.data.list[0]))
+    // eslint-disable-next-line no-console
+    .catch((err) => res.send(err))
+})
+
+server.get('/api/id', (req, res) => {
+  res.send(`id is ${id}`)
 })
 
 server.get('/*', (req, res) => {

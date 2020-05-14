@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate-skillcrucial",
+  "name": "weather",
   "version": "0.0.1",
-  "description": "Boilerplate SkillCrucial",
+  "description": "Weather Forecast",
   "main": "index.js",
   "scripts": {
     "docker-start-dev": "docker-compose -f \"docker\\DEV.docker-compose.yml\" up",
@@ -19,7 +19,7 @@
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "next:build": "next",
-    "watch:server": "nodemon --legacy-watch start.js --ignore \"*.hot-update.json\" --ignore \"js/bundle.js\" --ignore \"css/main.css\" --watch server --watch client --exec \"npm run lint:server  --scripts-prepend-node-path && node\"",
+    "watch:server": "clear && nodemon --legacy-watch start.js --ignore \"*.hot-update.json\" --ignore \"js/bundle.js\" --ignore \"css/main.css\" --watch server --watch client --exec \"npm run lint:server  --scripts-prepend-node-path && node\"",
     "build:prod": "cross-env NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors",
     "heroku-postbuild": "yarn run build:prod",
     "storybook": "start-storybook -p 6006",
@@ -68,6 +68,7 @@
     "@babel/runtime": "^7.7.6",
     "@storybook/cli": "^5.2.8",
     "autoprefixer": "^9.7.3",
+    "axios": "^0.19.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
