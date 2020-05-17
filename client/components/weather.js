@@ -39,8 +39,6 @@ function Weather(props) {
   }, [city])
 
   if (weatherState !== initialObject) {
-    // eslint-disable-next-line no-console
-    console.log(weatherState)
     return (
       <div>
         <div className="text-center pb-4">

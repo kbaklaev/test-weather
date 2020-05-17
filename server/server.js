@@ -25,11 +25,6 @@ server.use(bodyParser.json({ limit: '50mb', extended: true }))
 
 server.use(cookieParser())
 
-// server.use('/api/', (req, res) => {
-//   res.status(404)
-//   res.end()
-// })
-
 const echo = sockjs.createServer()
 echo.on('connection', (conn) => {
   connections.push(conn)
@@ -55,11 +50,9 @@ server.get('/api/weather/:city', async (req, res) => {
   const url = `https://api.openweathermap.org/data/2.5/find?q=${encodeURIComponent(
     req.params.city
   )}&units=metric&appid=${id}`
-  console.log(url)
   await axios
     .get(url)
     .then((data) => res.send(data.data.list[0]))
-    // eslint-disable-next-line no-console
     .catch((err) => res.send(err))
 })
 

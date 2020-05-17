@@ -5,25 +5,26 @@ import { bindActionCreators } from 'redux'
 import { push } from 'connected-react-router'
 import { connect } from 'react-redux'
 
-const NotFound = (props) => (
-  <div className="container main-wrapper aligner">
-    <div className="aligner-item text-center ">
-      <h1 className="display-1">404</h1>
-      <p className="lead text-gray-800 mb-5">Page Not Found</p>
-      <p className="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-      <br />
-      <button
-        className="btn btn-secondary btn-lg"
-        type="button"
-        tabIndex="0"
-        onClick={props.goRoot}
-      >
-        {' '}
-        Back to Dashboard
-      </button>
+const NotFound = (props) => {
+  return (
+    <div className="grid grid-cols-5 bg-gray-900 text-white h-screen font-mono text-center">
+      <div className="grid col-start-3 col-end-3 grid-rows-2 m-4">
+        <div className="p-4">
+          <h1 className="p-4">404</h1>
+          <p className="text-gray-500">page not found</p>
+          <p className="text-gray-500 p-4">¯\_(ツ)_/¯</p>
+          <button
+            className="p-2 border-solid border-2 border-gray-500"
+            type="button"
+            onClick={props.goRoot}
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 NotFound.propTypes = {
   goRoot: PropTypes.func
