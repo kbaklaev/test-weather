@@ -41,7 +41,7 @@ const WeatherApp = () => {
         </button>
       </div>
       <div className="grid grid-cols-3 pt-4">
-        <div className="grid col-start-2 col-end-2">
+        <div className="grid sm:col-span-3 md:col-start-2 md:col-end-2 lg:col-start-2 lg:col-end-2">
           <Weather city={cityStateToProps} />
         </div>
       </div>
