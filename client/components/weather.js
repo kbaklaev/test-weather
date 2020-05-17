@@ -42,8 +42,8 @@ function Weather(props) {
           {`${weatherState.name}, ${weatherState.sys.country}`}
         </div>
         <div className="grid grid-cols-2 border-dashed border-2 border-gray-500 pb-4 pt-4">
-          <div className="grid col-span-1">{ASCII[weatherState.weather[0].icon.slice(0, -1)]}</div>
-          <div className="grid col-span-1 text-center">
+          <div className="col-span-1">{ASCII[weatherState.weather[0].icon.slice(0, -1)]}</div>
+          <div className="col-span-1 text-center">
             {`temp: ${weatherState.main.temp.toFixed(1)} °С`}
             <br />
             {`pressure: ${weatherState.main.pressure}`}
