@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import Weather from './weather'
 
-const port = process.env.PORT
-
 const WeatherApp = () => {
   const [cityState, setCityState] = useState('')
   const [cityStateToProps, setCityStateToProps] = useState('')
@@ -16,6 +14,12 @@ const WeatherApp = () => {
     setCityStateToProps(cityState)
   }
 
+  const keyPress = (e) => {
+    if (e.key === 'Enter') {
+      setCityStateToProps(cityState)
+    }
+  }
+
   return (
     <div className="p-4 bg-gray-900 h-screen text-gray-500 font-mono">
       <div className="font-bold p-4 text-center">weather forecast</div>
@@ -26,6 +30,7 @@ const WeatherApp = () => {
           placeholder=" enter your city"
           value={cityState}
           onChange={(e) => changeCity(e)}
+          onKeyPress={(e) => keyPress(e)}
         />
         <button
           type="button"
@@ -38,7 +43,6 @@ const WeatherApp = () => {
       <div className="pt-4">
         <Weather city={cityStateToProps} />
       </div>
-      <div>{`port is ${port}`}</div>
     </div>
   )
 }

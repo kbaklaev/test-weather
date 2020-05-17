@@ -9,6 +9,8 @@ import axios from 'axios'
 import cookieParser from 'cookie-parser'
 import Html from '../client/html'
 
+require('dotenv').config()
+
 let connections = []
 const id = process.env.REACT_APP_OPENWEATHER_ID
 
@@ -53,11 +55,10 @@ server.get('/api/weather/:city', async (req, res) => {
   const url = `https://api.openweathermap.org/data/2.5/find?q=${encodeURIComponent(
     req.params.city
   )}&units=metric&appid=${id}`
+  console.log(url)
   await axios
     .get(url)
-    // eslint-disable-next-line no-console
-    .then(() => console.log(id, url))
-    // .then((data) => res.send(data.data.list[0]))
+    .then((data) => res.send(data.data.list[0]))
     // eslint-disable-next-line no-console
     .catch((err) => res.send(err))
 })
