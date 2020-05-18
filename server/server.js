@@ -5,6 +5,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import sockjs from 'sockjs'
 import axios from 'axios'
+import geoip from 'geoip-lite'
 
 import cookieParser from 'cookie-parser'
 import Html from '../client/html'
@@ -67,15 +68,16 @@ server.get('/api/weather-forecast/:city', async (req, res) => {
 })
 
 server.get('/api/ip-address', (req, res) => {
-  res.send(
-    `Your IP address is ${(req.headers['x-forwarded-for'] || '')
+  const ip =
+    (req.headers['x-forwarded-for'] || '')
       .split(',')
       .pop()
       .trim() ||
-      req.connection.remoteAddress ||
-      req.socket.remoteAddress ||
-      req.connection.socket.remoteAddress}`
-  )
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress
+  const geo = geoip.lookup(ip)
+  res.send(`Your IP address is ${ip}, ${geo.city}, ${geo.country}`)
 })
 
 server.get('/*', (req, res) => {
