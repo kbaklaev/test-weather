@@ -67,7 +67,15 @@ server.get('/api/weather-forecast/:city', async (req, res) => {
 })
 
 server.get('/api/ip-address', (req, res) => {
-  res.send(`Your IP address is ${req.connection.remoteAddress}`)
+  res.send(
+    `Your IP address is ${(req.headers['x-forwarded-for'] || '')
+      .split(',')
+      .pop()
+      .trim() ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress}`
+  )
 })
 
 server.get('/*', (req, res) => {
