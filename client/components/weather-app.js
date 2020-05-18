@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Weather from './weather'
 
 const WeatherApp = () => {
-  const [cityState, setCityState] = useState('')
+  const [cityState, setCityState] = useState(sessionStorage.getItem('city') || '')
   const [cityStateToProps, setCityStateToProps] = useState('')
 
   const changeCity = (e) => {
@@ -12,6 +12,7 @@ const WeatherApp = () => {
 
   const onSubmit = () => {
     setCityStateToProps(cityState)
+    sessionStorage.setItem('city', cityState)
   }
 
   const keyPress = (e) => {
@@ -19,6 +20,11 @@ const WeatherApp = () => {
       setCityStateToProps(cityState)
     }
   }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('city')) setCityStateToProps(sessionStorage.getItem('city'))
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="p-4 bg-gray-900 h-screen text-gray-500 font-mono">
@@ -47,6 +53,7 @@ const WeatherApp = () => {
         <div className="col-span-1" />
         <div className="col-span-1 sm:col-span-3 md:col-span-3 lg:col-span-3 xl:col-span-3">
           <Weather city={cityStateToProps} />
+          {/* {cityStateToProps} */}
         </div>
         <div className="col-span-1" />
       </div>

@@ -56,8 +56,18 @@ server.get('/api/weather/:city', async (req, res) => {
     .catch((err) => res.send(err))
 })
 
-server.get('/api/id', (req, res) => {
-  res.send(`id is ${id}`)
+server.get('/api/weather-forecast/:city', async (req, res) => {
+  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(
+    req.params.city
+  )}&units=metric&appid=${id}`
+  await axios
+    .get(url)
+    .then((data) => res.send(data.data))
+    .catch((err) => res.send(err))
+})
+
+server.get('/api/ip-address', (req, res) => {
+  res.send(`Your IP address is ${req.connection.remoteAddress}`)
 })
 
 server.get('/*', (req, res) => {
