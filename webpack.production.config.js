@@ -207,7 +207,8 @@ const config = {
       whitelistPatterns: [
         /width-\d+-percent/,
         /color-[1-8]/,
-        /single-input-(accent|primary|secondary)/
+        /single-input-(accent|primary|secondary)/,
+        /((\bsm\b)|(\bmd\b)|(\blg\b)|(\bxl\b)):\w*-\w*-[0-9]/
       ]
     }),
     new CopyWebpackPlugin([{ from: 'assets/images', to: 'images' }]),
