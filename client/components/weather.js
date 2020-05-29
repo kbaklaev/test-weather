@@ -29,7 +29,7 @@ function Weather(props) {
 
   useEffect(() => {
     if (city !== '') {
-      Axios.get(`https://ascii-weather.herokuapp.com/api/weather/${city}`)
+      Axios.get(`/api/weather/${city}`)
         .then((data) => setWeatherState(data.data))
         .catch((err) => err)
     }

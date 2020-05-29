@@ -202,9 +202,14 @@ const config = {
       chunkFilename: '[id].css',
       ignoreOrder: false
     }),
-    // new PurgecssPlugin({
-    //   paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
-    // }),
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
+      whitelistPatterns: [
+        /width-\d+-percent/,
+        /color-[1-8]/,
+        /single-input-(accent|primary|secondary)/
+      ]
+    }),
     new CopyWebpackPlugin([{ from: 'assets/images', to: 'images' }]),
     new CopyWebpackPlugin([{ from: 'assets/fonts', to: 'fonts' }]),
 
