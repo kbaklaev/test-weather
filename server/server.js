@@ -47,6 +47,68 @@ server.get('/', (req, res) => {
   )
 })
 
+// const forecast = obj.list.reduce((acc, rec) => {
+// 	let key = new Date(rec.dt * 1000).toLocaleDateString(undefined, {
+// 		year: 'numeric',
+// 		month: 'long',
+// 		day: 'numeric',
+// 	})
+// 	return {
+// 		...acc,
+// 		...(acc[key]
+// 			? {
+// 					[key]: {
+// 						temp: [...acc[key].temp, rec.main.temp],
+// 						pressure: [...acc[key].pressure, rec.main.pressure],
+// 						humidity: [...acc[key].humidity, rec.main.humidity],
+// 						wind: [...acc[key].wind, rec.wind.speed],
+// 						ascii: [...acc[key].ascii, rec.weather[0].icon],
+// 					},
+// 			  }
+// 			: {
+// 					[key]: {
+// 						temp: [rec.main.temp],
+// 						pressure: [rec.main.pressure],
+// 						humidity: [rec.main.humidity],
+// 						wind: [rec.wind.speed],
+// 						ascii: [rec.weather[0].icon],
+// 					},
+// 			  }),
+// 	}
+// }, {})
+
+// const average = Object.keys(forecast).reduce(
+// 	(acc, rec) => ({
+// 		...acc,
+// 		...{
+// 			[rec]: {
+// 				temp:
+// 					(
+// 						forecast[rec].temp.reduce((acc, rec) => acc + rec) /
+// 						forecast[rec].temp.length
+// 					).toFixed(1) + ' °C',
+// 				pressure:
+//           (
+//             forecast[rec].pressure.reduce((acc, rec) => acc + rec) /
+//             forecast[rec].pressure.length
+//           ).toFixed(0),
+// 				humidity:
+// 					(
+// 						forecast[rec].humidity.reduce((acc, rec) => acc + rec) /
+// 						forecast[rec].humidity.length
+// 					).toFixed(0) + ' %',
+// 				wind:
+// 					(
+// 						forecast[rec].wind.reduce((acc, rec) => acc + rec) /
+// 						forecast[rec].wind.length
+// 					).toFixed(0) + ' m/s',
+// 				ascii: forecast[rec].ascii[(forecast[rec].ascii.length / 2).toFixed(0)],
+// 			},
+// 		},
+// 	}),
+// 	{}
+// )
+
 server.get('/api/weather/:city', async (req, res) => {
   const url = `https://api.openweathermap.org/data/2.5/find?q=${encodeURIComponent(
     req.params.city
