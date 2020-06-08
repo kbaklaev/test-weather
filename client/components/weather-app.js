@@ -17,9 +17,7 @@ const WeatherApp = () => {
   }
 
   const keyPress = (e) => {
-    if (e.key === 'Enter') {
-      setCityStateToProps(cityState)
-    }
+    if (e.key === 'Enter') onSubmit(cityState)
   }
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 /* eslint-disable import/no-duplicates */
+/* eslint-disable no-console */
 import express from 'express'
 import path from 'path'
 import cors from 'cors'
@@ -115,7 +116,8 @@ server.get('/api/weather/:city', async (req, res) => {
   )}&units=metric&appid=${id}`
   await axios
     .get(url)
-    .then((data) => res.send(data.data.list[0]))
+    .then((data) => res.send(data.data.list))
+    // .then((data) => console.log(data.data.list))
     .catch((err) => res.send(err))
 })
 
