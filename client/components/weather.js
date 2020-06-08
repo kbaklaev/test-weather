@@ -4,28 +4,8 @@ import Axios from 'axios'
 
 import ASCII from './weather-ascii-var'
 
-const initialObject = {
-  name: '',
-  sys: {
-    country: ''
-  },
-  weather: [
-    {
-      icon: ''
-    }
-  ],
-  main: {
-    temp: '',
-    pressure: '',
-    humidity: ''
-  },
-  wind: {
-    speed: ''
-  }
-}
-
-function Weather(props) {
-  const [weatherState, setWeatherState] = useState(initialObject)
+const Weather = (props) => {
+  const [weatherState, setWeatherState] = useState('')
   const { city } = props
 
   useEffect(() => {
@@ -36,7 +16,7 @@ function Weather(props) {
     }
   }, [city])
 
-  if (weatherState !== initialObject) {
+  if (weatherState) {
     return (
       <div>
         <div className="text-center pb-4">
@@ -49,6 +29,7 @@ function Weather(props) {
             day: 'numeric'
           })}
         </div>
+        {/* &rarr; */}
         <div className="grid grid-cols-2 border-dashed border-2 border-gray-500 pb-4 pt-4">
           <div className="col-span-1">{ASCII[weatherState.weather[0].icon.slice(0, -1)]}</div>
           <div className="col-span-1 text-center">
