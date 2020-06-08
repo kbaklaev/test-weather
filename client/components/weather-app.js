@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 
 import Weather from './weather'
@@ -53,7 +54,6 @@ const WeatherApp = () => {
         <div className="col-span-1" />
         <div className="col-span-1 sm:col-span-3 md:col-span-3 lg:col-span-3 xl:col-span-3">
           <Weather city={cityStateToProps} />
-          {/* {cityStateToProps} */}
         </div>
         <div className="col-span-1" />
       </div>

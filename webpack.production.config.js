@@ -8,6 +8,7 @@ const TerserJSPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const uuidv4 = require('uuid/v4')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const PATHS = {
   src: path.join(__dirname, 'client')
@@ -208,7 +209,7 @@ const config = {
         /width-\d+-percent/,
         /color-[1-8]/,
         /single-input-(accent|primary|secondary)/,
-        /((\bsm\b)|(\bmd\b)|(\blg\b)|(\bxl\b)):\w*-\w*-[0-9]/
+        /(sm|md|lg|xl):(col|grid)-(cols|span)-[0-9]/
       ]
     }),
     new CopyWebpackPlugin([{ from: 'assets/images', to: 'images' }]),
@@ -227,6 +228,13 @@ const config = {
         }
       }
     ]),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     new webpack.DefinePlugin(
       Object.keys(process.env).reduce(
         (res, key) => ({ ...res, [key]: JSON.stringify(process.env[key]) }),
@@ -235,7 +243,7 @@ const config = {
     ),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production'
-    })
+    }),
   ]
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 
@@ -31,7 +32,7 @@ function Weather(props) {
     if (city !== '') {
       Axios.get(`/api/weather/${city}`)
         .then((data) => setWeatherState(data.data))
-        .catch((err) => err)
+        .catch((err) => console.log(err))
     }
   }, [city])
 
@@ -40,6 +41,13 @@ function Weather(props) {
       <div>
         <div className="text-center pb-4">
           {`${weatherState.name}, ${weatherState.sys.country}`}
+        </div>
+        <div className="text-center pb-4">
+          {new Date(weatherState.dt * 1000).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
         </div>
         <div className="grid grid-cols-2 border-dashed border-2 border-gray-500 pb-4 pt-4">
           <div className="col-span-1">{ASCII[weatherState.weather[0].icon.slice(0, -1)]}</div>
